@@ -9,5 +9,5 @@ for i in L:
     if i%2 == 0:
         counte+=1
     else:
-        count0+=1
+        counto+=1
 print("The count of even and odd elements in the list are ",counte,counto)
