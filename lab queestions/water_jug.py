@@ -7,7 +7,6 @@ stack = []
 visited = []
 found = False
 def put_state(new_state):
-    global stack, visited
     if new_state not in visited:
             stack.append(new_state)
             visited.append(new_state)
