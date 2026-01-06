@@ -15,7 +15,7 @@ def deposit(cash):
 def withdraw(cash):
     global balance
     check = balance-cash
-    if(cash!=0 and balance!=0 and check>=0):
+    if(cash!=0 and balance!=0 and check>=0): 
         balance-=cash
         print("Cash Withdrawn..")
     else:

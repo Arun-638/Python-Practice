@@ -27,7 +27,7 @@ class Solution(object):
         while len(rq)>0:
             r = rq.pop(front)
             c = cq.pop(front)
-            if [r, c] != entrance and maze[r][c] == '.' and ((r==0 or c ==0) or (r == m-1 or c == n-1)):
+            if [r, c] != entrance and maze[r][c] == '.' and ((r == 0 or c == 0) or (r == m-1 or c == n-1)):
                 reached_end = True
                 break
             for i in range(4):
