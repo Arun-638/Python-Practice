@@ -15,7 +15,6 @@ def is_goal(current):
     return current[jug] == goal
 stack.append(jugs)
 visited.append(jugs)
-print("Visited States:")
 while stack:
     current = stack.pop()
     if is_goal(current):
@@ -34,10 +33,10 @@ while stack:
     if current[1] > 0:
         new_state = [current[0], 0]
         put_state(new_state)
-    if current[0]+current[1] > capacity[0] and current[1] > 0:
+    if current[0]+current[1] >= capacity[0] and current[1] > 0:
         new_state = [capacity[0], current[1]-(capacity[0]-current[0])]
         put_state(new_state)
-    if current[0]+current[1] > capacity[1] and current[0] > 0:
+    if current[0]+current[1] >= capacity[1] and current[0] > 0:
         new_state = [current[0]-(capacity[1]-current[1]), capacity[1]]
         put_state(new_state)
     if current[0]+current[1] <= capacity[0] and current[1] > 0:
@@ -46,6 +45,7 @@ while stack:
     if current[0]+current[1] <= capacity[1] and current[0] > 0:
         new_state = [0, current[0]+current[1]]
         put_state(new_state)
-    print(visited)
+print("Visited States:")
+print(visited)
 if not found:
     print("Goal not reachable")
