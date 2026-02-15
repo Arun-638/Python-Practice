@@ -7,92 +7,82 @@ Solve the puzzles
 i) EAT + THAT = APPLE  
 ii) POINT + ZERO = ENERGY 
 iii) CROSS + ROADS = DANGER '''
-#SOLVE THIS PUZZLE USING AC 3 ALGORITHM + Backtracking
-puzzles = [
-    ('EAT','THAT','APPLE'),
-    ('POINT','ZERO','ENERGY'),
-    ('CROSS','ROADS','DANGER')
-]
-
-digits = list(range(10))
-
-def make_variables(puzzle):
-    vars = {}
-    for word in puzzle:
-        for ch in word:
-            if ch not in vars:
-                vars[ch] = digits[:]    
-    return vars
-
-def ac3(csp):
-    queue = [(xi, xj) for xi in csp for xj in csp if xi != xj]
-    while queue:
-        (xi, xj) = queue.pop(0)
-        if revise(csp, xi, xj):
-            if not csp[xi]:
-                return False
-            for xk in csp:
-                if xk != xi and xk != xj:
-                    queue.append((xk, xi))
-    return True
-
-def revise(csp, xi, xj):
-    revised = False
-    if len(csp[xj]) == 1:
-        val = csp[xj][0]
-        if val in csp[xi]:
-            csp[xi].remove(val)
-            revised = True
-    return revised
-
-def backtrack(csp, assignment, puzzle):
-    if len(assignment) == len(csp):
-        if arithmetic_ok(puzzle, assignment):
-            return assignment
-        return False
-    
-    var = select_unassigned_variable(csp, assignment)
-    for value in csp[var]:
-        if is_consistent(var, value, assignment) and not (value == 0 and is_leading(var, puzzle)):
-            assignment[var] = value
-            result = backtrack(csp, assignment, puzzle)
-            if result:
-                return result
-            del assignment[var]
-    return False
-
-def select_unassigned_variable(csp, assignment):
-    for var in csp:
-        if var not in assignment:
-            return var
-
-def is_consistent(var, value, assignment):
-    return value not in assignment.values()
-
-def is_leading(var, puzzle):
-    for word in puzzle:
-        if word[0] == var:
+#AC 3
+def revise(domains, xi, xj):
+    if len(domains[xj]) == 1:
+        value = domains[xj][0]
+        if value in domains[xi]:
+            domains[xi].remove(value)
             return True
     return False
+def ac3(domains,variables):
+    queue = []
+    for xi in variables:
+        for xj in variables:
+            if xi != xj:
+                queue.append((xi,xj))
+    while queue:
+        (xi,xj) = queue.pop(0)
+        if revise(domains,xi,xj):
+            if not domains[xi]:
+                return False
+            for xk in variables:
+                if xk != xi and xk != xj:
+                    queue.append((xk,xi))
+    return True
+#backtracking
+def select_unassigned_variable(assignment, variables, domains):
+    unassigned = [v for v in variables if v not in assignment]
+    return min(unassigned, key=lambda var: len(domains[var]))
 
-def arithmetic_ok(puzzle, assignment):
-    if len(assignment) < len(set(''.join(puzzle))):
-        return True
-    
-    w1, w2, w3 = puzzle
-    n1 = int("".join(str(assignment[c]) for c in w1))
-    n2 = int("".join(str(assignment[c]) for c in w2))
-    n3 = int("".join(str(assignment[c]) for c in w3))
-    return n1 + n2 == n3
-
-for puzzle in puzzles:
-    csp = make_variables(puzzle)
-    if ac3(csp):
-        solution = backtrack(csp, {}, puzzle)
-        if solution:
-            print(f"Solution for {puzzle}: {solution}")
+def is_consistent(assignment,value,letter):
+    for l,v in assignment.items():
+        if v == value and l != letter:
+            return False
+    return True
+def check_sum(assignment,word1,word2,result):
+    def word_number(word):
+        number = 0
+        for letter in word:
+            number = number * 10 + assignment[letter]
+        return number
+    return word_number(word1) + word_number(word2) == word_number(result)
+def backtrack(assignment, variables, domains, word1, word2, result):
+    if len(assignment) == len(variables):
+        if check_sum(assignment, word1, word2, result):
+            return assignment
         else:
-            print(f"No solution found for {puzzle}")
+            return "failure"
+    letter = select_unassigned_variable(assignment, variables,domains)
+    for value in domains[letter]:
+        if is_consistent(assignment, value,letter):
+            assignment[letter] = value
+            solution = backtrack(assignment, variables, domains, word1, word2, result)
+            if solution != "failure":
+                return solution
+            del assignment[letter]
+    return "failure"
+def solve_cryptarithmetic(word1, word2, result):
+    print("Solving: ", word1, "+", word2, "=", result)
+    variables = []
+    for letter in word1 + word2 + result:
+        if letter not in variables:
+            variables.append(letter)
+    domains = {}
+    for letter in variables:
+        domains[letter] = list(range(10))
+    for first in [word1[0], word2[0], result[0]]:
+        if 0 in domains[first]:
+            domains[first].remove(0)
+    if not ac3(domains, variables):
+        print("No solution found.")
+        return
+    assignment = {}
+    solution = backtrack(assignment, variables, domains, word1, word2, result)
+    if solution == "failure":
+        print("No solution found.")
     else:
-        print(f"No solution found for {puzzle} using AC-3")
-
+        print("Solution: ", solution)
+solve_cryptarithmetic("EAT", "THAT", "APPLE")
+solve_cryptarithmetic("POINT", "ZERO", "ENERGY")
+solve_cryptarithmetic("CROSS", "ROADS", "DANGER")
