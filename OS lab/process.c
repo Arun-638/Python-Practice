@@ -7,9 +7,28 @@
 int n;
 int pid[MAX], bt[MAX], at[MAX], pr[MAX];
 int ct[MAX], tat[MAX], wt[MAX];
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
+/* Sort by Arrival Time (for FCFS) */
+void sort_by_arrival() {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (at[j] > at[j + 1]) {
+                swap(&at[j], &at[j + 1]);
+                swap(&bt[j], &bt[j + 1]);
+                swap(&pid[j], &pid[j + 1]);
+                swap(&pr[j], &pr[j + 1]);
+            }
+        }
+    }
+}
 /* ---------- FCFS ---------- */
 double fcfs() {
+    sort_by_arrival();
     int time = 0, total = 0;
 
     for (int i = 0; i < n; i++) {

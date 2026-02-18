@@ -19,7 +19,7 @@ def ac3(domains,variables):
     queue = []
     for xi in variables:
         for xj in variables:
-            if xi != xj:
+            if xi != xj and (xi,xj) not in queue:
                 queue.append((xi,xj))
     while queue:
         (xi,xj) = queue.pop(0)
@@ -27,7 +27,7 @@ def ac3(domains,variables):
             if not domains[xi]:
                 return False
             for xk in variables:
-                if xk != xi and xk != xj:
+                if xk != xi and xk != xj and (xk,xi) not in queue:
                     queue.append((xk,xi))
     return True
 #backtracking
