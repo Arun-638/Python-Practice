@@ -72,5 +72,3 @@ elif h2 < h1 and h2 < h3:
     print("Heuristic 2 is the best heuristic for this problem.")
 else:
     print("Heuristic 3 is the best heuristic for this problem.")
-# initial = [['E'], ['B', 'F'], ['D', 'A', 'C']]
-# goal = [['A', 'D', 'B'], ['E', 'F', 'C'], []]

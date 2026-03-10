@@ -1,12 +1,5 @@
-initial = [[1,2,3],
-           [4,5,6],
-           [7,8,-1]]
-# goal = [[1,2,3],
-#         [4,5,6],
-#         [7,-1,8]]
-goal = [[-1,1,2],
-        [3,4,5],
-        [6,7,8]]
+initial = []
+goal = []
 def heuristic(state):
     count = 0
     for i in range(3):
@@ -60,4 +53,11 @@ def puzzle(initial,Goal):
     print("Number of States Visited:",len(visited))
     if(found==False):
         print("Goal State Not Reached")
+print("Enter the initial state :")
+for i in range(3):
+    initial.append(list(map(int,input().split())))
+print("Enter the goal state :")
+for i in range(3):
+    goal.append(list(map(int,input().split())))
+print()
 puzzle(initial,goal)

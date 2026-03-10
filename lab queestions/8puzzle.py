@@ -1,5 +1,5 @@
-initial = [[1,2,3],[4,5,6],[7,-1,8]]
-Goal = [[1,2,3],[4,5,6],[7,8,-1]]
+initial = []
+Goal = []
 def puzzle(initial,Goal):
     ns = [-1,1,0,0]
     ew = [0,0,-1,1]
@@ -10,6 +10,11 @@ def puzzle(initial,Goal):
     visited.append(initial)
     while(len(queue)>0):
         item = queue.pop(0)
+        for i in range(3):
+            for j in range(3):
+                print(item[i][j],end=" ")
+            print()
+        print()
         if(item==Goal):
             print("Goal State Reached")
             found = True
@@ -33,4 +38,11 @@ def puzzle(initial,Goal):
                         visited.append(temp)
     if(found==False):
         print("Goal State Not Reached")
+print("Enter the initial state :")
+for i in range(3):
+    initial.append(list(map(int,input().split())))
+print("Enter the goal state :")
+for i in range(3):
+    Goal.append(list(map(int,input().split())))
+print()
 puzzle(initial,Goal)

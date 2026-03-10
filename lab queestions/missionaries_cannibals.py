@@ -62,4 +62,6 @@ def missionaries_cannibals(M, C):
                 new_f = new_g + h
                 queue.append((temp, new_g, new_f, path + [temp]))
     print("Goal Not Reached")
-missionaries_cannibals(3, 3)
+M = int(input("Enter the number of missionaries: "))
+C = int(input("Enter the number of cannibals: "))
+missionaries_cannibals(M, C)
