@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <math.h>
-
-int n;
+int n;                          
 int arr[100];
 double mean, median, stddev;
 
