@@ -69,7 +69,7 @@ double srtf(){
     return (double)total/n;
 }
 
-double priority(){ //non preemptive
+double priority(){
     int time = 0,total = 0,completed = 0;
     int done[MAX] = {0};
     SortByArrival();
@@ -99,9 +99,7 @@ double priority(){ //non preemptive
 double RR(){
     int time = 0, completed = 0, total = 0;
     int rt[MAX];
-    
     SortByArrival();
-
     for(int i=0;i<n;i++){
         rt[i] = bt[i];
     }
@@ -128,10 +126,8 @@ double RR(){
                 total += wt[i];
             }
         }
-
-        i = (i + 1) % n;   // move to next process in circular order
-
-        if(i == 0 && time < at[0])   // CPU idle case
+        i = (i + 1) % n;
+        if(i == 0 && time < at[0])  
             time++;
     }
 

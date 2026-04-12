@@ -48,6 +48,7 @@ int main() {
             finish[i] = 1;
         else
             finish[i] = 0;
+    }
     int found;
 
     do {
@@ -97,7 +98,5 @@ int main() {
         printf("\n");
     }
 
-    
-}
 return 0;
 }

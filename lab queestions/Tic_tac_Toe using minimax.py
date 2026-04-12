@@ -18,7 +18,6 @@ def check_winner(board):
             return board[combo[0]]
     return None
 
-# 🔹 Alpha-Beta version
 def minimax(board, depth, is_maximizing, alpha, beta):
     winner = check_winner(board)
 
@@ -51,7 +50,6 @@ def minimax(board, depth, is_maximizing, alpha, beta):
                 board[i] = 'X'
                 score = minimax(board, depth+1, True, alpha, beta)
                 board[i] = '-'
-                
                 best_score = min(best_score, score)
                 beta = min(beta, best_score)
                 if beta <= alpha:
