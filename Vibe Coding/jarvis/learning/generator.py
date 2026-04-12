@@ -44,3 +44,29 @@ class LearnedSkill(BaseSkill):
         path = os.path.join(self.skills_dir, f"{name}.py")
         with open(path, "w") as f:
             f.write(code)
+
+    def generate_from_history(self, history: list) -> str:
+        \"\"\"
+        Converts a list of recorded actions into a Python skill.
+        MOCK: Simulates LLM conversion of action types into a structured Python script.
+        \"\"\"
+        actions_summary = []
+        for action in history:
+            action_type = action.get("type", "unknown")
+            data = action.get("data", {})
+            actions_summary.append(f"Perform {action_type} with data {data}")
+
+        steps_code = "\\n        ".join([f"print('{step}')" for step in actions_summary])
+
+        description = f"Automated skill based on {len(history)} recorded actions"
+        return f'''
+from jarvis.skills.base import BaseSkill
+
+class LearnedActionSkill(BaseSkill):
+    metadata = {{"name": "learned_action_skill", "description": "{description}"}}
+    def execute(self, params):
+        print("Executing learned action sequence...")
+        {steps_code if steps_code else "print('No actions to execute')"}
+        return "Action sequence completed successfully"
+'''
+
