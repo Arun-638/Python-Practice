@@ -1,3 +1,0 @@
-Architecture: Modular Orchestrator\nInput: Hybrid (Voice/Chat)\nLearning: Interactive, Observation, Example-based (writing Python modules to skills/)
-UX: Hybrid (Voice/Chat), Neural TTS, Visual Cues, Proactive Suggestions for Learning
-Safety/Integration: py-auto-gui, playwright, 3-tier permissions, local SQLite memory. Short-term memory: 5-minute window.
