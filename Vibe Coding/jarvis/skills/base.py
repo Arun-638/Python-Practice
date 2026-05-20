@@ -8,12 +8,12 @@ class BaseSkill(ABC):
     """
 
     @abstractmethod
-    def execute(self, **kwargs: Any) -> Any:
+    def execute(self, params: dict) -> Any:
         """
         Execute the skill logic.
 
         Args:
-            **kwargs: Arbitrary keyword arguments passed to the skill.
+            params: Dictionary of arguments passed to the skill.
 
         Returns:
             The result of the skill execution.

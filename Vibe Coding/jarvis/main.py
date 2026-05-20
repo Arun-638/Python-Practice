@@ -1,60 +1,47 @@
 import os
-import sys
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from jarvis.skills.manager import SkillManager
 from jarvis.memory import MemorySystem
 from jarvis.brain import Brain
 
 def main():
-    # 1. Setup directory for skills
-    # We assume the skills directory is inside the jarvis package
     base_dir = os.path.dirname(os.path.abspath(__file__))
     skills_dir = os.path.join(base_dir, "skills")
 
     if not os.path.exists(skills_dir):
         os.makedirs(skills_dir)
-        print(f"Created skills directory at {skills_dir}")
 
-    # 2. Initialize Systems
-    print("Initializing Jarvis...")
-
-    # Skill Manager
+    print("Initializing J.A.R.V.I.S...")
     skill_manager = SkillManager(skills_dir)
     skill_manager.load_skills()
+    print(f"  → Loaded skills: {list(skill_manager.skills.keys()) or 'none'}")
 
-    # Memory System (using a local sqlite file)
     memory = MemorySystem("jarvis_memory.db")
+    brain  = Brain(skill_manager, memory)
+    print("  → Brain online. Gemini AI ready.\n")
+    print("Type 'exit' to quit.\n")
 
-    # Brain
-    brain = Brain(skill_manager, memory)
-
-    print("Jarvis is online. Type 'exit' or 'quit' to stop.")
-
-    # 3. REPL Loop
     while True:
         try:
             user_input = input("You: ").strip()
-
             if not user_input:
                 continue
-
             if user_input.lower() in ("exit", "quit"):
-                print("Jarvis: Shutting down. Goodbye!")
+                print("Jarvis: Shutting down. Goodbye, Sir.")
                 break
 
-            # Process request
             response = brain.process(user_input)
-
-            # Print response
-            print(f"Jarvis: {response}")
-
-            # Update short-term memory
-            memory.add_short_term(f"User said: {user_input}\nJarvis replied: {response}")
+            print(f"Jarvis: {response}\n")
+            memory.add_short_term(f"User: {user_input}\nJarvis: {response}")
 
         except KeyboardInterrupt:
-            print("\nJarvis: Shutting down. Goodbye!")
+            print("\nJarvis: Shutting down. Goodbye, Sir.")
             break
         except Exception as e:
-            print(f"Jarvis Error: {e}")
+            print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()

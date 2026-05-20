@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pytest:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m 'feat: define base skill contract:*)",
+      "Bash(git commit:*)",
+      "Bash(export PYTHONPATH=\"F:/Python Practice/Vibe Coding\")",
+      "Bash(PYTHONPATH=. pytest:*)",
+      "Bash(export PYTHONPATH=.)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(echo 'module.exports = {:*)",
+      "Bash(npm run:*)",
+      "Bash(npx vite:*)",
+      "Bash(PYTHONPATH=\"F:/Python Practice/Vibe Coding\" pytest:*)"
+    ]
+  }
+}

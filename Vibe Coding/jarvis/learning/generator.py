@@ -46,10 +46,10 @@ class LearnedSkill(BaseSkill):
             f.write(code)
 
     def generate_from_history(self, history: list) -> str:
-        \"\"\"
+        """
         Converts a list of recorded actions into a Python skill.
         MOCK: Simulates LLM conversion of action types into a structured Python script.
-        \"\"\"
+        """
         actions_summary = []
         for action in history:
             action_type = action.get("type", "unknown")
