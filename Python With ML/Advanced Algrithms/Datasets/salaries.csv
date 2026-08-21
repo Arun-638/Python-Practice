@@ -1,0 +1,31 @@
+company,job,degree,salary_more_than_100k
+Google,Software Engineer,Bachelors,Yes
+Google,Data Scientist,Masters,Yes
+Google,Manager,Masters,Yes
+Microsoft,Software Engineer,Bachelors,Yes
+Microsoft,Data Scientist,Masters,Yes
+Amazon,Software Engineer,Bachelors,Yes
+Amazon,Manager,Masters,Yes
+Apple,Software Engineer,Bachelors,Yes
+Apple,Data Scientist,Masters,Yes
+Meta,Software Engineer,Bachelors,Yes
+Meta,Manager,Masters,Yes
+Tesla,Software Engineer,Bachelors,Yes
+Tesla,Data Scientist,Masters,Yes
+Netflix,Software Engineer,Masters,Yes
+Netflix,Manager,Masters,Yes
+Infosys,Software Engineer,Bachelors,No
+TCS,Software Engineer,Bachelors,No
+Wipro,Data Analyst,Bachelors,No
+Accenture,Data Scientist,Masters,Yes
+IBM,Software Engineer,Bachelors,Yes
+Google,Data Scientist,Masters,Yes
+Microsoft,Manager,Masters,Yes
+Amazon,Data Scientist,Bachelors,Yes
+Apple,Manager,Masters,Yes
+Meta,Data Scientist,Masters,Yes
+Tesla,Manager,Masters,Yes
+Netflix,Data Scientist,Masters,Yes
+Infosys,Manager,Masters,No
+TCS,Data Analyst,Bachelors,No
+Accenture,Manager,Masters,Yes
